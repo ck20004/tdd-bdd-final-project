@@ -184,12 +184,11 @@ def list_products():
         products = Product.find_by_name(name)
     elif category:
         app.logger.info("Find by category: %s", category)
-        # create enum from string
+        # Ensure you import or define Category if it is used here.
         category_value = getattr(Category, category.upper())
         products = Product.find_by_category(category_value)
     elif available:
         app.logger.info("Find by available: %s", available)
-        # create bool from string
         available_value = available.lower() in ["true", "yes", "1"]
         products = Product.find_by_availability(available_value)
     else:
@@ -203,7 +202,7 @@ def list_products():
 # R E A D   A   P R O D U C T
 ######################################################################
 
-@app.route("/products/<int:product_id>".methods=["GET"])
+@app.route("/products/<int:product_id>",methods=["GET"])
 def get_products(product_id):
     app.logger.info("Request to Retrieve a product with id [%s]", product_id)
     product = Product.find(product_id)
@@ -214,9 +213,9 @@ def get_products(product_id):
 
 def test_get_product_not_found(self):
     response = self.client.get(f"{BASE_URL}/0")
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-        data = response.get_json()
-        self.assertIn("was not found", data["message"])
+    self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+    data = response.get_json()
+    self.assertIn("was not found", data["message"])
 
 ######################################################################
 # U P D A T E   A   P R O D U C T

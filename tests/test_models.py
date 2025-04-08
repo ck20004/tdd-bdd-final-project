@@ -152,7 +152,7 @@ class TestProductModel(unittest.TestCase):
         self.assertEqual(len(products), 5)
 
     def test_find_by_name(self):
-       products = ProductFactory.create_batch(5)
+        products = ProductFactory.create_batch(5)
         for product in products:
             product.create()
         name = products[0].name
